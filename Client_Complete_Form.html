@@ -90,15 +90,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="main.js" defer></script>
+<script src="auth.js"></script>
+<script>window.VFAuth && window.VFAuth.requireAuth();</script>
+<style>
+  .logout-btn {
+    margin-left: 12px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #f0f0f0;
+    border-radius: 999px;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .logout-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+</style>
 </head>
 <body>
     <div id="webgl-container"></div>
     <div class="noise-overlay"></div>
-    
+
     <nav class="navbar">
         <div class="nav-logo">VIVEK FINANCIAL FOCUS LIMITED</div>
         <div class="nav-links">
             <a href="index.html" class="portal-btn">Return Home</a>
+            <a href="#" class="logout-btn" onclick="event.preventDefault(); window.VFAuth.logout();">LOGOUT</a>
         </div>
     </nav>
 

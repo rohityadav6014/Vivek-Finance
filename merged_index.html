@@ -364,6 +364,7 @@ iframe#frame {
 }
 
 </style>
+<script src="auth.js"></script>
 </head>
 <body>
     <div id="webgl-container"></div>
@@ -375,8 +376,19 @@ iframe#frame {
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#portal" class="portal-btn" onclick="togglePortal(event)">Portal</a>
+            <a href="#" id="nav-logout" style="display:none; margin-left:12px; padding:6px 14px; border:1px solid rgba(255,255,255,0.25); border-radius:999px; color:#f0f0f0; text-decoration:none; font-size:0.85rem; letter-spacing:1px;" onclick="event.preventDefault(); window.VFAuth.logout();">Logout</a>
         </div>
     </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var refresh = function () {
+                var el = document.getElementById('nav-logout');
+                if (el) el.style.display = (window.VFAuth && window.VFAuth.isAuthenticated()) ? 'inline-block' : 'none';
+            };
+            refresh();
+            window.addEventListener('storage', refresh);
+        });
+    </script>
 
     <main id="smooth-wrapper">
         <div id="smooth-content">
@@ -1164,8 +1176,13 @@ logoWrapper.addEventListener('mouseleave', () => {
         var portal = document.getElementById('portal');
         var home = document.getElementById('home-content');
         var btn = document.querySelector('.portal-btn');
-        
+
         if (portal.style.display === 'none') {
+            if (window.VFAuth && !window.VFAuth.isAuthenticated()) {
+                var next = encodeURIComponent('/merged_index.html?openPortal=1');
+                window.location.href = 'login.html?next=' + next;
+                return;
+            }
             home.style.display = 'none';
             portal.style.display = 'flex';
             btn.innerText = 'Home';
@@ -1184,6 +1201,15 @@ logoWrapper.addEventListener('mouseleave', () => {
             }, 100);
         }
     }
+
+    // Auto-open portal after redirected login.
+    document.addEventListener('DOMContentLoaded', function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('openPortal') === '1' && window.VFAuth && window.VFAuth.isAuthenticated()) {
+            togglePortal();
+            history.replaceState(null, '', window.location.pathname);
+        }
+    });
 
     function b64DecodeUnicode(str) {
         if (!str) return "<h1>Form not found.</h1>";
