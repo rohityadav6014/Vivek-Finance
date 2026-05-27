@@ -24,15 +24,15 @@ window.AUTH_ENDPOINT = "https://script.google.com/macros/s/AKfycbxmxOpnpfDA5WTir
 
   function isAuthenticated() {
     const s = getSession();
-    return !!(s && s.email);
+    return !!(s && s.userId);
   }
 
-  async function login(email, password) {
+  async function login(userId, password) {
     if (!window.AUTH_ENDPOINT || window.AUTH_ENDPOINT.indexOf("PASTE_") === 0) {
       return { ok: false, error: "endpoint_not_configured" };
     }
     const body = new URLSearchParams();
-    body.set("email", email);
+    body.set("userid", userId);
     body.set("password", password);
     try {
       const res = await fetch(window.AUTH_ENDPOINT, {
@@ -41,7 +41,7 @@ window.AUTH_ENDPOINT = "https://script.google.com/macros/s/AKfycbxmxOpnpfDA5WTir
       });
       const data = await res.json();
       if (data.ok) {
-        setSession({ email: data.email, at: Date.now() });
+        setSession({ userId: data.userId, at: Date.now() });
       }
       return data;
     } catch (err) {

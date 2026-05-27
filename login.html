@@ -169,11 +169,11 @@
     </div>
     <div class="panel">
       <h1>SIGN IN</h1>
-      <p class="lede">Enter your credentials to access the client portal.</p>
+      <p class="lede">Enter your user ID and password to access the client portal.</p>
       <form id="login-form" autocomplete="on">
         <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="username" autofocus>
+          <label for="userid">User ID</label>
+          <input type="text" id="userid" name="userid" required autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" autofocus>
         </div>
         <div class="field">
           <label for="password">Password</label>
@@ -207,8 +207,8 @@
       const btn = document.getElementById("submit-btn");
 
       const ERROR_MESSAGES = {
-        missing_credentials: "Please enter both email and password.",
-        invalid_credentials: "Email or password is incorrect.",
+        missing_credentials: "Please enter both user ID and password.",
+        invalid_credentials: "User ID or password is incorrect.",
         inactive: "This account is currently inactive. Contact the administrator.",
         no_users: "No users configured. Contact the administrator.",
         sheet_misconfigured: "Server configuration error. Contact the administrator.",
@@ -223,10 +223,10 @@
         btn.disabled = true;
         btn.textContent = "SIGNING IN…";
 
-        const email = document.getElementById("email").value.trim();
+        const userId = document.getElementById("userid").value.trim();
         const password = document.getElementById("password").value;
 
-        const result = await window.VFAuth.login(email, password);
+        const result = await window.VFAuth.login(userId, password);
         if (result.ok) {
           window.location.replace(getNext());
           return;
