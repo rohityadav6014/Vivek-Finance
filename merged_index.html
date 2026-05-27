@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Financial Focus Limited</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --bg-color: #030303;
+    --text-color: #f0f0f0;
+    --primary: #fc6076;
+    --secondary: #ff9a44;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+}
+
+#webgl-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.04;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(3,3,3,0.8) 0%, rgba(3,3,3,0) 100%);
+}
+
+.nav-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.nav-links a,
+.nav-links a:link,
+.nav-links a:visited,
+.nav-links a:active {
+    color: #ffffff !important;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+}
+
+.nav-links a:hover {
+    opacity: 0.8 !important;
+}
+
+.nav-links .portal-btn {
+    background: linear-gradient(45deg, #ff9a44, #fc6076);
+    padding: 10px 24px;
+    border-radius: 24px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(252, 96, 118, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    display: inline-block;
+}
+
+.nav-links .portal-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(252, 96, 118, 0.6);
+    opacity: 1;
+}
+
+.brutal-text {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(4rem, 12vw, 12rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.brutal-text.sm {
+    font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.brutal-text.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-color);
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 5vw;
+    position: relative;
+}
+
+.hero-content {
+    width: 50vw;
+    max-width: 600px;
+    z-index: 10;
+}
+
+.subtitle {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    max-width: 400px;
+    opacity: 0.8;
+    line-height: 1.5;
+    letter-spacing: 3px;
+}
+
+.logo-wrapper {
+    position: fixed;
+    right: 5vw;
+    top: 0;
+    width: 40vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.logo-3d {
+    width: 400px;
+    height: 400px;
+    transform-style: preserve-3d;
+    will-change: transform;
+    opacity: 0.8;
+}
+
+.brand-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 40px rgba(252, 96, 118, 0.5));
+    transform: translateZ(50px);
+}
+
+.editorial-section {
+    min-height: 80vh;
+    padding: 10vw 5vw;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10vw;
+    align-items: center;
+    width: 100%;
+}
+
+.glow-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem;
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    color: var(--secondary);
+}
+
+.services-section {
+    padding: 10vw 5vw;
+    position: relative;
+}
+
+.massive-text {
+    font-family: 'Anton', sans-serif;
+    font-size: 20vw;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 3px white;
+    opacity: 0.4;
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.service-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15vh;
+}
+
+.service-item.reverse {
+    justify-content: flex-end;
+}
+
+.service-content {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4rem;
+    border-radius: 24px;
+    backdrop-filter: blur(15px);
+    max-width: 800px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.service-content h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: linear-gradient(45deg, #ff9a44, #fc6076);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.service-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+    margin-bottom: 1.5rem;
+}
+
+.portal-section {
+    padding: 10vw 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portal-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.tab:hover, .tab.active {
+    background: rgba(252, 96, 118, 0.3);
+    border-color: #fc6076;
+    box-shadow: 0 0 20px rgba(252, 96, 118, 0.4);
+    transform: translateY(-2px);
+}
+
+.iframe-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+iframe#frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+.footer-section {
+    padding: 10vw 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero { flex-direction: column; justify-content: center; text-align: center; }
+    .hero-content { width: 100%; max-width: none; }
+    .container { grid-template-columns: 1fr; }
+    .logo-wrapper { right: 0; width: 100vw; z-index: 0; opacity: 0.15; }
+    .service-content { padding: 2rem; }
+}
+    </style>
+</head>
+<body>
+    <div id="webgl-container"></div>
+    <div class="noise-overlay"></div>
+    
+    <nav class="navbar">
+        <div class="nav-logo">VIVEK FINANCIAL</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="Client_Complete_Form.html">Portal</a>
+        </div>
+    </nav>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="brutal-text" data-speed="0.8">
+                        <span class="line">VIVEK</span>
+                        <span class="line">FINANCIAL</span>
+                    </h1>
+                    <p class="subtitle" data-speed="1.1">FOCUS LIMITED</p>
+                </div>
+                <div class="logo-wrapper">
+                    <div class="logo-3d">
+                        <img src="logo.png" alt="Vivek Financial Logo" class="brand-svg">
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="editorial-section">
+                <div class="container">
+                    <div class="text-block split-text">
+                        <h2 class="brutal-text sm">OUR<br>BELIEF</h2>
+                    </div>
+                    <div class="glass-card" data-speed="1.1">
+                        <h3>FOUNDED IN 1995</h3>
+                        <p class="glow-text">A boutique brokerage founded in 1995. One belief has guided every client relationship since: the stock market is not a casino. It does not reward urgency or impulse. It rewards the investor who knows what they own, why they own it, stays within their means, and has the discipline to resist the noise around them. The investor who values their savings gives it the best possible purpose. That understanding deepens with every conversation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="services-section">
+                <h2 class="massive-text scroll-text">SERVICES</h2>
+                
+                <div class="service-item">
+                    <div class="service-content">
+                        <h3>Equity Brokerage</h3>
+                        <span class="badge">NSE | BSE</span>
+                        <p>Every stage of a transaction — instruction, execution, settlement, and every corporate action that follows — is handled with the client's interest taking precedence. That responsibility is permanent, not transactional. A decision in the making requires a lot of information. The investor may seek market commentary, product context, and our reading of the environment at every stage of their consideration — so that what you decide, you decide with full clarity. The decision remains yours. We remain available through every stage of it.</p>
+                    </div>
+                </div>
+
+                <div class="service-item reverse">
+                    <div class="service-content">
+                        <h3>Depository Operations</h3>
+                        <span class="badge">NSDL Depository Participant</span>
+                        <p>Your securities are held in dematerialised form through NSDL, a depository constituted under an Act of Parliament. As a registered Depository Participant, we are your first point of contact for all depository services. The same rigour and compliance that has defined our firm since 1995 governs every depository instruction we process.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-content">
+                        <h3>Mutual Funds</h3>
+                        <span class="badge">AMFI Registered Distributor</span>
+                        <p>Every mutual fund transaction is rooted in what the investor shares — their horizon, objectives, risk appetite, and financial commitments. Based on that, we identify and present the most relevant options of category and scheme across equity, debt, and hybrid for the investors to opt. The investor decides. The money moves directly from the investor to the AMC — never through us. We remain engaged through every stage that follows, and portfolios are reviewed as the investor's needs evolve.</p>
+                    </div>
+                </div>
+
+                <div class="service-item reverse">
+                    <div class="service-content">
+                        <h3>Fixed Income & Debt</h3>
+                        <span class="badge">Bonds | NCDs | G-Secs | Corporate Deposits</span>
+                        <p>The instinct to protect capital is not conservative thinking. It is sound thinking. Sovereign and high-quality fixed income instruments — bonds, NCDs, government securities, and corporate deposits — exist to honour that instinct and provide a counterbalance to market volatility.</p>
+                        <p>The fixed income market offers a wide range of options. Identifying instruments that balance issuer credibility with the best available return within an acceptable risk boundary requires knowledge of that landscape. We bring that knowledge to every client conversation.</p>
+                        <p>We facilitate primary and secondary market access. Primary market investments start at Rs. 10,000. Secondary market transactions require a minimum of Rs. 5 lakhs.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-content">
+                        <h3>IPO</h3>
+                        <span class="badge">Initial Public Offer | NSE | BSE</span>
+                        <p>An IPO is an opportunity to become a passive part owner of a business at its point of entry into public markets. The decision involves more variables than investing in an already listed security — the company's prospects have not yet been validated by the market. The likely gains that may occur on listing are not the only measure. Participating in an IPO requires the same seriousness as any equity investment — an assessment of the business, not just the opportunity.</p>
+                        <p>We facilitate IPO applications through BSE and NSE platforms for eligible investors. The process, timeline, and allotment mechanics are routinely shared with investors showing interest.</p>
+                    </div>
+                </div>
+
+                <div class="service-item reverse">
+                    <div class="service-content">
+                        <h3>Unlisted Shares</h3>
+                        <span class="badge">Pre-IPO | Private Placement</span>
+                        <p>Unlisted shares represent ownership in a company before it enters public markets. Such transactions typically arise when an entrepreneur seeks to raise capital or when early investors choose to exit — for reasons not always publicly available. The range of outcomes is wide — phenomenal gains or catastrophic losses — driven by factors such as governance, competitive dynamics, and technological shifts that continue to evolve long after the investment is made. This is a high risk, high gain asset class.</p>
+                        <p>Lower liquidity, limited price discovery, and a longer holding horizon are inherent characteristics of this asset class, not exceptions to be managed around.</p>
+                        <p>This is not a product for every investor. For those who understand what they are acquiring and on what terms, we may facilitate transactions.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-content">
+                        <h3>Futures & Options</h3>
+                        <span class="badge">NSE</span>
+                        <p>Futures and options are instruments of risk management, designed to hedge existing exposures against exceptional market volatility. That is their original and legitimate purpose.</p>
+                        <p>Warren Buffett, writing in Berkshire Hathaway's 2002 annual letter, described derivatives as "financial weapons of mass destruction, carrying dangers that, while now latent, are potentially lethal." The warning was directed at the financial system. It applies with equal force to the individual investor who enters this segment without full understanding of what they are holding.</p>
+                        <p>Peter F. Drucker, in Management Challenges for the 21st Century (1999), observed that the world's largest financial institutions — American, British, Japanese, German, French, Swiss — had increasingly resorted to "trading for their own account," that is, to outright speculation. This, he wrote, "as centuries of financial history teach (beginning with the Medici in 15th-century Europe), has only one — but an absolutely certain — outcome: catastrophic losses." What Drucker described at the institutional level, retail investors in the F&O segment are replicating at the individual level — with identical results.</p>
+                        <div id="fo-hidden-text" style="display: none;">
+                            <p>Published research by SEBI on the equity F&O segment reveals that over 9 out of 10 individual traders incur losses — with aggregate retail losses exceeding Rs. 1.8 lakh crore over just three years. Viewed differently, every rupee lost by the nine is going somewhere. It is going to the tenth participant — the well-capitalised, technologically equipped proprietary desks, algorithmic traders, and institutional players who enter this segment with information advantages and processing speeds that the retail investor cannot match and was never meant to compete with.</p>
+                            <p>They understand retail behaviour with precision. They know that the retail investor carries two simultaneous pressures: the desire to grow small savings meaningfully, and the anxiety of not being able to afford a serious loss. That combination makes retail participation predictable. Predictable participants are, by definition, profitable counterparties for those on the other side.</p>
+                            <p>The techniques that bring retail investors to this table are not accidental. Zero and nominal brokerage offers make the cost of entry feel trivial. Free tips and calls create an illusion of guided certainty. Within many broking organisations, compensation structures reward employees on the basis of turnover generated. This creates a persistent internal pressure to encourage more trading, which compounds the external luring mechanisms already at work on the retail investor. Financial media amplifies winners and quietly buries losses. Peer accounts of exceptional gains do the rest. The retail investor does not feel pushed into this segment. They feel invited. That distinction matters — because invited participants rarely examine the terms of the invitation.</p>
+                            <p>The instrument itself demands respect. Unlike equities, a derivatives position carries daily cash obligations regardless of your intention to hold. A position that moves against you does not wait. Losses can exceed the amount originally committed. These are not warnings in fine print. They are the lived experience of many retail participants.</p>
+                            <p>Clients who understand the instrument and appreciate the full implications of participating in this segment are welcome to trade futures and options on NSE through us.</p>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleFOText(this)" style="background: transparent; border: 1px solid #fc6076; color: #fc6076; padding: 10px 20px; font-family: 'Inter', sans-serif; cursor: pointer; border-radius: 4px; margin-top: 1rem; transition: all 0.3s ease;">Read More</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="footer-section">
+                <h1 class="brutal-text outline">VIVEK FINANCIAL</h1>
+                <p>Focus Limited © 2026. All rights reserved.</p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+
+
+        function toggleFOText(btn) {
+            const hiddenText = document.getElementById('fo-hidden-text');
+            if(hiddenText.style.display === 'none') {
+                hiddenText.style.display = 'block';
+                btn.innerText = 'Read Less';
+                ScrollTrigger.refresh(); // Update scroll triggers so the animation heights recalculate
+            } else {
+                hiddenText.style.display = 'none';
+                btn.innerText = 'Read More';
+                ScrollTrigger.refresh();
+            }
+        }
+    </script>
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+// --- Smooth Scrolling (Lenis) ---
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+});
+
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// --- Three.js Background (Floating Mesh & Particles) ---
+const canvasContainer = document.getElementById('webgl-container');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+canvasContainer.appendChild(renderer.domElement);
+
+// Particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 800;
+const posArray = new Float32Array(particlesCount * 3);
+
+for(let i = 0; i < particlesCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 15;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    color: 0xfc6076,
+    transparent: true,
+    opacity: 0.6,
+    blending: THREE.AdditiveBlending
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+// Floating Mesh (TorusKnot or Icosahedron)
+const meshGeometry = new THREE.IcosahedronGeometry(2, 1);
+const meshMaterial = new THREE.MeshStandardMaterial({
+    color: 0x111111,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.15
+});
+const floatingMesh = new THREE.Mesh(meshGeometry, meshMaterial);
+scene.add(floatingMesh);
+
+// Lights
+const pointLight = new THREE.PointLight(0xfc6076, 2, 10);
+pointLight.position.set(2, 2, 2);
+scene.add(pointLight);
+const pointLight2 = new THREE.PointLight(0xff9a44, 2, 10);
+pointLight2.position.set(-2, -2, 2);
+scene.add(pointLight2);
+
+camera.position.z = 5;
+
+// Mouse tracking for Parallax
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+const windowHalfX = window.innerWidth / 2;
+const windowHalfY = window.innerHeight / 2;
+
+document.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX - windowHalfX);
+    mouseY = (event.clientY - windowHalfY);
+});
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+const clock = new THREE.Clock();
+
+function animate() {
+    const elapsedTime = clock.getElapsedTime();
+
+    targetX = mouseX * 0.001;
+    targetY = mouseY * 0.001;
+
+    particlesMesh.rotation.y += 0.0005;
+    particlesMesh.rotation.x += 0.0002;
+    
+    floatingMesh.rotation.y += 0.002;
+    floatingMesh.rotation.x += 0.001;
+    
+    // Parallax effect
+    particlesMesh.position.x += (targetX - particlesMesh.position.x) * 0.05;
+    particlesMesh.position.y += (-targetY - particlesMesh.position.y) * 0.05;
+    
+    floatingMesh.position.x += (targetX * 2 - floatingMesh.position.x) * 0.05;
+    floatingMesh.position.y += (-targetY * 2 - floatingMesh.position.y) * 0.05;
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+}
+animate();
+
+// --- GSAP & ScrollTrigger Animations ---
+gsap.registerPlugin(ScrollTrigger);
+
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// Logo 360 Rotation on Scroll
+gsap.to('.logo-3d', {
+    rotationY: 360,
+    ease: "none",
+    scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1
+    }
+});
+
+// Initial Reveal
+const tl = gsap.timeline();
+tl.from('.nav-logo, .nav-links a', {
+    y: -20,
+    duration: 1,
+    stagger: 0.1,
+    ease: 'power3.out'
+})
+.from('.hero .line', {
+    y: 100,
+    opacity: 0,
+    duration: 1.2,
+    stagger: 0.2,
+    ease: 'power4.out'
+}, "-=0.8")
+.from('.logo-3d', {
+    scale: 0.8,
+    opacity: 0,
+    duration: 1.5,
+    ease: 'power3.out'
+}, "-=1")
+.from('.subtitle', {
+    y: 20,
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.out'
+}, "-=1");
+
+// Text block reveal
+gsap.utils.toArray('.split-text').forEach(element => {
+    gsap.from(element.children, {
+        scrollTrigger: {
+            trigger: element,
+            start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
+});
+
+// Glass card reveal
+gsap.from('.glass-card', {
+    scrollTrigger: {
+        trigger: '.editorial-section',
+        start: "top 70%",
+    },
+    x: 100,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out'
+});
+
+// Services reveal
+gsap.utils.toArray('.service-item').forEach((item, i) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 85%"
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+    });
+});
+
+// Scroll text background
+gsap.to('.scroll-text', {
+    scrollTrigger: {
+        trigger: '.services-section',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+    },
+    x: "-30vw",
+    ease: "none"
+});
+    </script>
+</body>
+</html>
