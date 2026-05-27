@@ -106,21 +106,45 @@
     text-transform: uppercase;
   }
   .field { margin-bottom: 18px; }
-  input[type=email], input[type=password] {
+  .panel input[type=text],
+  .panel input[type=email],
+  .panel input[type=password] {
+    display: block;
+    box-sizing: border-box;
     width: 100%;
-    padding: 14px 16px;
+    height: 48px;
+    padding: 0 16px;
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--border);
     border-radius: 10px;
     color: var(--text);
     font-family: inherit;
     font-size: 15px;
-    transition: border-color 0.2s, background 0.2s;
+    letter-spacing: 0.2px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+            appearance: none;
   }
-  input:focus {
+  .panel input::placeholder { color: rgba(255,255,255,0.35); }
+  .panel input:hover {
+    background: rgba(255,255,255,0.055);
+    border-color: rgba(255,255,255,0.22);
+  }
+  .panel input:focus {
     outline: none;
     border-color: var(--accent);
     background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 0 3px rgba(212, 146, 58, 0.18);
+  }
+  /* Keep autofilled inputs on-brand instead of Chrome's yellow */
+  .panel input:-webkit-autofill,
+  .panel input:-webkit-autofill:hover,
+  .panel input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text);
+    -webkit-box-shadow: 0 0 0 1000px rgba(20,20,22,0.95) inset;
+    box-shadow: 0 0 0 1000px rgba(20,20,22,0.95) inset;
+    caret-color: var(--text);
+    transition: background-color 9999s ease-in-out 0s;
   }
   button[type=submit] {
     width: 100%;
