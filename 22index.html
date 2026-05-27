@@ -12,25 +12,25 @@
   .container { max-width: 1100px; margin: 0 auto; background: #fff; padding: 32px;
     border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .doc-header { display: flex; justify-content: space-between; align-items: flex-start;
-    border-bottom: 2px solid #1a3a6c; padding-bottom: 14px; margin-bottom: 18px; gap: 16px; }
-  .doc-header h1 { margin: 0 0 6px; font-size: 22px; color: #1a3a6c; }
+    border-bottom: 2px solid #E8692A; padding-bottom: 14px; margin-bottom: 18px; gap: 16px; }
+  .doc-header h1 { margin: 0 0 6px; font-size: 22px; color: #1C1C1C; font-family: 'Cormorant Garamond', serif; font-weight: 700; }
   .subtitle { color: #555; font-size: 13px; }
   .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .brand img.wordmark { height: 22px; }
   .brand img.seal { height: 56px; }
   .toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
-    padding: 14px; background: #eef3fb; border-radius: 8px; }
+    padding: 14px; background: #F5F0EC; border-radius: 8px; }
   button { padding: 10px 18px; border: none; border-radius: 6px; font-size: 14px;
-    font-weight: 600; cursor: pointer; transition: all .15s; }
-  .btn-primary { background: #1a3a6c; color: #fff; }
+    font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+  .btn-primary { background: #1C1C1C; color: #fff; }
   .btn-primary:hover { background: #122a52; }
   .btn-secondary { background: #f0a500; color: #fff; }
   .btn-secondary:hover { background: #d18f00; }
-  .btn-ghost { background: #fff; color: #1a3a6c; border: 1px solid #1a3a6c; }
-  .btn-ghost:hover { background: #eef3fb; }
+  .btn-ghost { background: #fff; color: #1C1C1C; border: 1px solid #1C1C1C; }
+  .btn-ghost:hover { background: #F5F0EC; }
   fieldset { border: 1px solid #d8dde6; border-radius: 8px; padding: 16px 20px 20px;
     margin-bottom: 18px; }
-  legend { font-weight: 700; color: #1a3a6c; padding: 0 8px; font-size: 14px;
+  legend { font-weight: 700; color: #1C1C1C; font-family: 'Cormorant Garamond', serif; padding: 0 8px; font-size: 14px;
     text-transform: uppercase; letter-spacing: .5px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 12px 16px; }
@@ -45,8 +45,8 @@
   input[type="number"], select, textarea { width: 100%; padding: 8px 10px;
     border: 1px solid #c8cfd9; border-radius: 5px; font-size: 13px; font-family: inherit;
     background: #fff; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: #1a3a6c;
-    box-shadow: 0 0 0 2px rgba(26,58,108,.15); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #E8692A;
+    box-shadow: 0 0 0 2px rgba(232,105,42,.15); }
   .checkbox-group { display: flex; gap: 14px; flex-wrap: wrap; padding: 6px 0; }
   .checkbox-group label { display: flex; align-items: center; gap: 5px; font-size: 13px;
     font-weight: 400; cursor: pointer; }
@@ -55,7 +55,7 @@
     border-radius: 6px; border: 1px solid #e3e6eb; margin-bottom: 12px; }
   textarea { min-height: 60px; resize: vertical; }
   .toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 18px;
-    background: #1a3a6c; color: #fff; border-radius: 8px;
+    background: #1C1C1C; color: #fff; border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0,0,0,.15); opacity: 0; transform: translateY(20px);
     transition: all .3s; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateY(0); }
@@ -67,7 +67,7 @@
 <div class="container">
   <div class="doc-header">
     <div>
-      <h1>Annexure-2 &mdash; Know Your Client (KYC) Form</h1>
+      <h1>Account Opening Form</h1>
       <div class="subtitle">Please fill this form in ENGLISH and in BLOCK LETTERS</div>
     </div>
     <div class="brand" id="brandBlock"></div>
@@ -81,16 +81,16 @@
 
   <form id="kycForm" autocomplete="off">
       <div class="tabs-container" style="margin-bottom: 20px;">
-      <div class="tab-buttons" style="display: flex; gap: 10px; border-bottom: 2px solid #1a3a6c; padding-bottom: 10px;">
-        <button type="button" class="tab-btn active" id="tabBtn1" onclick="openTab(1)" style="padding: 8px 16px; background: #1a3a6c; color: white; border: none; border-radius: 4px; cursor: pointer;">First Holder</button>
-        <button type="button" class="tab-btn" id="tabBtn2" onclick="openTab(2)" style="padding: 8px 16px; background: #eef3fb; color: #1a3a6c; border: none; border-radius: 4px; cursor: pointer; display: none;">Second Holder</button>
-        <button type="button" class="tab-btn" id="tabBtn3" onclick="openTab(3)" style="padding: 8px 16px; background: #eef3fb; color: #1a3a6c; border: none; border-radius: 4px; cursor: pointer; display: none;">Third Holder</button>
+      <div class="tab-buttons" style="display: flex; gap: 10px; border-bottom: 2px solid #E8692A; padding-bottom: 10px;">
+        <button type="button" class="tab-btn active" id="tabBtn1" onclick="openTab(1)" style="padding: 8px 16px; background: #E8692A; color: white; border: none; border-radius: 4px; cursor: pointer;">First Holder</button>
+        <button type="button" class="tab-btn" id="tabBtn2" onclick="openTab(2)" style="padding: 8px 16px; background: #F5F0EC; color: #1C1C1C; border: none; border-radius: 4px; cursor: pointer; display: none;">Second Holder</button>
+        <button type="button" class="tab-btn" id="tabBtn3" onclick="openTab(3)" style="padding: 8px 16px; background: #F5F0EC; color: #1C1C1C; border: none; border-radius: 4px; cursor: pointer; display: none;">Third Holder</button>
       </div>
     </div>
     
     
-<div style="margin-bottom: 20px; padding: 15px; background: #eef3fb; border-radius: 8px; border: 1px solid #c8cfd9;">
-    <label style="font-size: 14px; font-weight: 700; color: #1a3a6c; margin-right: 10px;">Number of Holders:</label>
+<div style="margin-bottom: 20px; padding: 15px; background: #F5F0EC; border-radius: 3px; border: 1px solid #d8dde6;">
+    <label style="font-size: 14px; font-weight: 700; color: #1C1C1C; margin-right: 10px;">Number of Holders:</label>
     <select id="numHoldersSelect" onchange="toggleHolders(this.value)" style="width: 150px; padding: 8px; border-radius: 5px; border: 1px solid #c8cfd9;">
       <option value="1">1 Holder</option>
       <option value="2">2 Holders</option>
@@ -660,7 +660,7 @@ const LOGO_WORDMARK = (function() {
   c.width = 400; c.height = 100;
   const ctx = c.getContext("2d");
   const grad = ctx.createLinearGradient(0, 0, 400, 0);
-  grad.addColorStop(0, "#1a3a6c");
+  grad.addColorStop(0, "#1C1C1C");
   grad.addColorStop(1, "#0e2345");
   ctx.fillStyle = grad;
   ctx.font = "bold 36px Georgia, serif";
@@ -1113,8 +1113,8 @@ function openTab(num) {
     const btn = document.getElementById('tabBtn'+i);
     const content = document.getElementById('tab'+i);
     if(btn) {
-      btn.style.background = (i === num) ? '#1a3a6c' : '#eef3fb';
-      btn.style.color = (i === num) ? 'white' : '#1a3a6c';
+      btn.style.background = (i === num) ? '#E8692A' : '#F5F0EC';
+      btn.style.color = (i === num) ? 'white' : '#1C1C1C';
     }
     if(content) content.style.display = (i === num) ? 'block' : 'none';
   }
@@ -1276,7 +1276,7 @@ function renderKycPages(doc, data) {
   }
 
   // ============================================================
-  // PAGE 1 — Identity / POI / POA / Correspondence
+  // PAGE 1 Ã¢â‚¬â€ Identity / POI / POA / Correspondence
   // ============================================================
   kycPageHeader();
 
@@ -1491,7 +1491,7 @@ function renderKycPages(doc, data) {
   doc.text('3. Proof of Address (PoA)*', M, y);
   y += TITLE_GAP;
 
-  // 3.1 sub-section — checkbox is ticked (this is the active address)
+  // 3.1 sub-section Ã¢â‚¬â€ checkbox is ticked (this is the active address)
   setBorder(COL_BORDER, 0.5);
   doc.rect(M, y, 9, 9);
   doc.setLineWidth(1.0);
@@ -1657,7 +1657,7 @@ function renderKycPages(doc, data) {
   });
 
   // ============================================================
-  // PAGE 2 — Contact / FATCA / Related / Remarks / Decl / Office
+  // PAGE 2 Ã¢â‚¬â€ Contact / FATCA / Related / Remarks / Decl / Office
   // ============================================================
   doc.addPage();
   y = M;
@@ -1891,14 +1891,14 @@ function renderKycPages(doc, data) {
   doc.setFont('helvetica', 'bold').setFontSize(9);
   setText(COL_TEXT);
   doc.text('Documents Received', M, y + 7);
-  // Always ticked — applicant submits certified copies with the form
+  // Always ticked Ã¢â‚¬â€ applicant submits certified copies with the form
   drawCheckbox(M + 116, y, 'Certified Copies', true, { fontSize: 8.5 });
   y += 13;
 
   // Two-column office block
   const colMid = M + CONTENT_W / 2 + 10;
   function officeBlock(title, instr, blockData) {
-    // Headers — measure title width with the BOLD font BEFORE switching to italic
+    // Headers Ã¢â‚¬â€ measure title width with the BOLD font BEFORE switching to italic
     doc.setFont('helvetica', 'bold').setFontSize(8.8);
     const tw = doc.getTextWidth(title);
     setText(COL_TEXT);
@@ -2227,8 +2227,8 @@ function renderForm9Page42(doc, PW, PH, M, RIGHT_X, CONTENT_W) {
 
     renderSection('Liability of the Depository', [
         {n: '21.', t: 'As per Section 16 of Depositories Act, 1996,'},
-        {n: '•', t: 'Without prejudice to the provisions of any other law for the time being in force, any loss caused to the beneficial owner due to the negligence of the depository or the participant, the depository shall indemnify such beneficial owner.'},
-        {n: '•', t: 'Where the loss due to the negligence of the participant under Clause (1) above, is indemnified by the depository, the depository shall have the right to recover the same from such participant.'}
+        {n: 'Ã¢â‚¬Â¢', t: 'Without prejudice to the provisions of any other law for the time being in force, any loss caused to the beneficial owner due to the negligence of the depository or the participant, the depository shall indemnify such beneficial owner.'},
+        {n: 'Ã¢â‚¬Â¢', t: 'Where the loss due to the negligence of the participant under Clause (1) above, is indemnified by the depository, the depository shall have the right to recover the same from such participant.'}
     ]);
 
     doc.setFont('helvetica','normal').setFontSize(10);
@@ -2455,7 +2455,7 @@ function renderForm9Page44(doc, data, PW, PH, M, RIGHT_X, CONTENT_W) {
     ];
     
     notes.forEach((n) => {
-        var lines = doc.splitTextToSize("• " + n, CONTENT_W - 10);
+        var lines = doc.splitTextToSize("Ã¢â‚¬Â¢ " + n, CONTENT_W - 10);
         doc.text(lines, M + 10, y);
         y += lines.length * 11 + 2;
     });
@@ -2569,7 +2569,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     doc.text('(FOR INDIVIDUALS)', PW/2, y + 26, {align:'center'});
     y = 80;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ Company / Client-ID Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Company / Client-ID ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     var hH = 32;
     doc.rect(M, y, CONTENT_W * 0.52, hH);
     doc.rect(M + CONTENT_W * 0.52, y, CONTENT_W * 0.48, hH);
@@ -2585,7 +2585,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCells(cix + 6, y + 17, '', 10, 12, 12);
     y += hH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ Request + Date Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Request + Date ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     var reqH = 20;
     doc.rect(M, y, CONTENT_W, reqH);
     doc.setFont('helvetica','normal').setFontSize(7);
@@ -2595,8 +2595,8 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawDateBoxes(RIGHT_X - 122, y + 4, data.declarationDate);
     y += reqH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE A Ã¢â€â‚¬Ã¢â€â‚¬
-    var RH = 22; // standard row height Ã¢â‚¬â€ text won't touch borders
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE A ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
+    var RH = 22; // standard row height ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â text won't touch borders
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M + SL, y, M + SL, y + RH);
     cText('A', M + 3, y, RH, {bold:true, fs:9});
@@ -2670,7 +2670,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     cText('Brief details:', c1 + 6, y, RH, {fs:7.5});
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE B Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE B ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('B', M + 3, y, RH, {bold:true, fs:9});
@@ -2694,7 +2694,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCells(panSplit + 38, y + 5, '', 10, 12, 12);
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE C Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE C ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('C', M + 3, y, RH, {bold:true, fs:9});
@@ -2716,7 +2716,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCheckbox(M+SL+tw+10, y+46, 'Others (Please specify)', false, {size:8, fontSize:7.5});
     y += cBodyH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE D Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE D ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('D', M + 3, y, RH, {bold:true, fs:9});
@@ -2740,7 +2740,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCheckbox(M+SL+tw+10, y+32, 'More than 25 lac', inc === '25Lac+', {size:8, fontSize:7.5});
     y += dBodyH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE E Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE E ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('E', M + 3, y, RH, {bold:true, fs:9});
@@ -2755,7 +2755,7 @@ function renderForm9Page1(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     cText('RBI Approval date', M+SL+6, y, RH, {fs:7.5});
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE F Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE F ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('F', M + 3, y, RH, {bold:true, fs:9});
@@ -2861,7 +2861,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     if(data.bankIfsc) drawCells(fdX+10, y+5, data.bankIfsc, 11, 13, 13);
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE G Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE G ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('G', M+3, y, RH, {bold:true, fs:9});
@@ -2874,7 +2874,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCheckbox(M+SL+280, y+7, 'Related to a Politically Exposed Person (PEP)', false, {size:8, fontSize:7.5});
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE H Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE H ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('H', M+3, y, RH, {bold:true, fs:9});
@@ -2974,7 +2974,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
           y += smsRH;
       }
 
-    // H5 / H6 Ã¢â‚¬â€ use merged label cells spanning 2 rows
+    // H5 / H6 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â use merged label cells spanning 2 rows
     var h56LabelW = 100;
     var h56DataX = M + SL + h56LabelW;
     var h56RH = 22;
@@ -3019,7 +3019,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     drawCheckbox(h6Mid+12, y+7, 'All joint account holders', false, {size:8, fontSize:7.5});
     y += h56RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE I Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE I ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('I', M+3, y, RH, {bold:true, fs:9});
@@ -3055,7 +3055,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     cText('Relationship of Guardian with minor', M+SL+6, y, RH, {fs:7.5});
     y += RH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE J Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE J ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('J', M+3, y, RH, {bold:true, fs:9});
@@ -3078,7 +3078,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     doc.text('by SEBI)', jMid+22, y+34);
     y += jH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ TABLE K Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ TABLE K ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     doc.rect(M, y, CONTENT_W, RH);
     doc.line(M+SL, y, M+SL, y+RH);
     cText('K', M+3, y, RH, {bold:true, fs:9});
@@ -3102,7 +3102,7 @@ function renderForm9Page2(doc, data, PW, PH, M, RIGHT_X, CONTENT_W, drawCells, d
     doc.text(kText, M+SL+6, y+10);
     y += kExpH;
 
-    // Ã¢â€â‚¬Ã¢â€â‚¬ Declaration Ã¢â€â‚¬Ã¢â€â‚¬
+    // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Declaration ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
     y += 4;
     doc.setFont('helvetica','bold').setFontSize(9);
     doc.text('Declaration', PW/2, y+6, {align:'center'});
