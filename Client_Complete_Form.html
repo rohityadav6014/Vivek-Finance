@@ -71,7 +71,47 @@
     border: none;
     background: transparent;
   }
-  
+  /* Submit footer below the iframe */
+  .submit-bar {
+    width: 90%;
+    max-width: 1200px;
+    margin: -30px auto 50px auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 11;
+  }
+  .submit-status {
+    color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    min-height: 1.2em;
+    flex: 1;
+    text-align: right;
+    opacity: 0.85;
+  }
+  .submit-status.error { color: #ff7676; opacity: 1; }
+  .submit-status.success { color: #6dd66d; opacity: 1; }
+  .submit-btn {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #d4923a, #b97a26);
+    color: #1a1208;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(212,146,58,0.35);
+    transition: transform 0.1s, box-shadow 0.2s, opacity 0.2s;
+  }
+  .submit-btn:hover:not(:disabled) { box-shadow: 0 10px 28px rgba(212,146,58,0.55); transform: translateY(-1px); }
+  .submit-btn:active:not(:disabled) { transform: translateY(1px); }
+  .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+
   /* Make sure original form at bottom is visible if shown */
   .container {
     position: relative;
@@ -145,6 +185,11 @@
         <div class="content">
             <iframe id="frame" src=""></iframe>
         </div>
+
+        <div class="submit-bar">
+            <div class="submit-status" id="submitStatus"></div>
+            <button type="button" class="submit-btn" id="submitBtn">Submit &amp; Download PDF</button>
+        </div>
     </div>
 <script>
   const docs = [
@@ -166,21 +211,104 @@
     }
   }
 
+  // Tab index → form key sent to the Apps Script
+  const FORM_KEYS = ['account_opening', 'kyc', 'modification'];
+  let currentTab = 0;
+
   function showTab(idx) {
+    currentTab = idx;
     document.querySelectorAll('.tab').forEach((t, i) => {
         if(i === idx) t.classList.add('active');
         else t.classList.remove('active');
     });
-    
+
     // We use srcdoc to embed the raw HTML document directly into the iframe securely
     const htmlContent = b64DecodeUnicode(docs[idx]);
     document.getElementById('frame').srcdoc = htmlContent;
+
+    // Reset status when switching tabs
+    setStatus('');
+  }
+
+  function setStatus(text, kind) {
+    const el = document.getElementById('submitStatus');
+    if (!el) return;
+    el.textContent = text || '';
+    el.classList.remove('error', 'success');
+    if (kind) el.classList.add(kind);
+  }
+
+  function collectFormData() {
+    const frame = document.getElementById('frame');
+    const doc = frame && frame.contentDocument;
+    if (!doc) return null;
+    const form = doc.getElementById('kycForm') || doc.querySelector('form');
+    if (!form) return null;
+    const params = new URLSearchParams();
+    const fd = new FormData(form);
+    fd.forEach((v, k) => { params.append(k, v); });
+    return { params, doc };
+  }
+
+  async function submitCurrentForm() {
+    const btn = document.getElementById('submitBtn');
+    if (!window.VFAuth || !window.VFAuth.isAuthenticated()) {
+      setStatus('Session expired. Please sign in again.', 'error');
+      window.VFAuth && window.VFAuth.logout();
+      return;
+    }
+    if (!window.AUTH_ENDPOINT || /^PASTE_/.test(window.AUTH_ENDPOINT)) {
+      setStatus('Submission endpoint not configured.', 'error');
+      return;
+    }
+    const collected = collectFormData();
+    if (!collected) {
+      setStatus('Form not ready yet — please wait a moment and try again.', 'error');
+      return;
+    }
+    const { params, doc } = collected;
+    const session = window.VFAuth.getSession() || {};
+    params.set('action', 'submit');
+    params.set('form', FORM_KEYS[currentTab] || 'account_opening');
+    params.set('userid', session.userId || '');
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'SUBMITTING…';
+    setStatus('Saving to Google Sheet…');
+
+    try {
+      const res = await fetch(window.AUTH_ENDPOINT, { method: 'POST', body: params });
+      const data = await res.json();
+      if (!data || !data.ok) {
+        setStatus('Submission failed: ' + ((data && data.error) || 'unknown error'), 'error');
+        btn.disabled = false;
+        btn.textContent = originalText;
+        return;
+      }
+      setStatus('Saved to "' + data.tab + '" (row ' + data.row + '). Preparing PDF…', 'success');
+      // Trigger the iframe's own PDF download
+      const downloadBtn = doc.getElementById('downloadBtn');
+      if (downloadBtn) {
+        downloadBtn.click();
+        setStatus('Saved to "' + data.tab + '" (row ' + data.row + '). PDF downloaded.', 'success');
+      } else {
+        setStatus('Saved to "' + data.tab + '" (row ' + data.row + '). (PDF download button not found.)', 'success');
+      }
+    } catch (err) {
+      setStatus('Network error: ' + err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
   }
 
   // Initialize with the first tab
-  window.onload = function() {
+  window.addEventListener('load', function () {
       showTab(0);
-  };
+      const btn = document.getElementById('submitBtn');
+      if (btn) btn.addEventListener('click', submitCurrentForm);
+  });
 </script>
 </body>
 </html>
